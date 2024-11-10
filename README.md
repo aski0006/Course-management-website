@@ -1,2 +1,64 @@
-# Course-management-website
-This project is a course management system developed using HTML, CSS, JavaScript and JavaEE. The system aims to provide an efficient and convenient management platform for educational institutions or training institutions to manage course information, student information, teacher information and course arrangement.
+# 课程管理系统
+
+## 描述
+
+本项目是一个使用 `HTML`, `CSS`, `JavaScript` 和 `JavaEE` 开发的课程管理系统。该系统旨在为教育机构或培训机构提供一个高效、便捷的管理平台，用于管理课程信息、学生信息、教师信息以及课程安排等。
+
+## 主要功能
+
+- **用户管理:** 管理员可以添加、删除、修改用户信息，包括学生、教师和管理员账号同时提供注册功能。
+
+- **课程管理:** 管理员可以发布、编辑和删除课程信息，包括课程名称、课程描述、授课教师、上课时间、地点等。
+
+- **学生管理:** 学生可以查看课程信息、选课、退课，并查看自己的课程表。
+
+- **教师管理:** 教师可以查看自己负责的课程信息、学生名单，并进行课程管理。
+
+- **课程安排:** 系统可以根据课程信息自动生成课程表，方便学生和教师查看。
+
+## 技术栈
+
+- **前端:** HTML, CSS, JavaScript
+
+- **后端:** JavaEE, Servlet, JSP, JDBC
+
+- **数据库:** MySQL
+
+- **版本控制:** Git, GitHub
+
+## 开发环境
+
+- **JDK 1.8 及以上**
+
+- Eclipse 或 IntelliJ IDEA
+
+- MySQL 数据库
+
+- Apache Tomcat 服务器
+
+## 安装和运行
+
+1. 将项目 clone 到本地：
+   
+    · `git clone https://github.com/aski0006/Course-management-website.git `
+
+2. 导入项目到 Eclipse 或 IntelliJ IDEA。
+
+3. 配置数据库连接，创建数据库和数据表。
+
+4. 配置 Tomcat 服务器，并将项目部署到服务器。
+
+5. 启动 Tomcat 服务器，访问系统。
+
+## 贡献
+
+### 欢迎任何形式的贡献，包括但不限于：
+
+- 提交 bug 报告
+- 提出功能建议
+- 贡献代码
+- 完善文档
+
+## 许可证
+
+#### 本项目采用 MIT 许可证。
