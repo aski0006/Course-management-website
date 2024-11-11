@@ -1,110 +1,83 @@
-/**
- * 用户实体类，对应数据库中的users表。
- */
 package com.asaki0019.project.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * 用户实体类，封装了用户的基本信息。
+ * 用户类，用于表示系统中的用户信息。
  */
 public class User {
     /**
-     * 用户的唯一标识符，对应数据库中的id字段。
+     * 用户名，唯一标识一个用户。
      */
-    private long id;
+    private String account;
 
     /**
-     * 用户名，对应数据库中的username字段，不可为空且唯一。
-     */
-    private String username;
-
-    /**
-     * 用户密码，对应数据库中的password字段，不可为空。
-     * 通常需要更长的字符串来存储加密后的密码。
+     * 用户密码，用于登录验证。
      */
     private String password;
 
     /**
-     * 用户的全名，对应数据库中的name字段，不可为空。
+     * 用户真实姓名。
      */
     private String name;
 
     /**
-     * 用户的角色，对应数据库中的role字段，不可为空。
+     * 用户角色，用于权限管理。
      */
     private String role;
 
     /**
-     * 用户的创建时间，对应数据库中的created_time字段，不可为空。
+     * 用户创建时间。
      */
-    private Date createdTime;
+    private LocalDateTime createdTime;
 
     /**
-     * 用户的更新时间，对应数据库中的updated_time字段，不可为空。
+     * 用户信息最后更新时间。
      */
-    private Date updatedTime;
+    private LocalDateTime updatedTime;
 
     /**
-     * 无参构造函数。
+     * 默认构造方法。
      */
     public User() {
     }
 
     /**
-     * 全参构造函数，初始化用户信息。
+     * 带参数的构造方法，用于初始化用户信息。
      *
-     * @param id 用户ID
-     * @param username 用户名
+     * @param account 用户名
      * @param password 用户密码
-     * @param name 用户全名
-     * @param role 用户角色
+     * @param name     用户真实姓名
+     * @param role     用户角色
      */
-    public User(long id, String username, String password, String name, String role) {
-        this.id = id;
-        this.username = username;
+    public User(String account, String password, String name, String role) {
+        this.account = account;
         this.password = password;
         this.name = name;
         this.role = role;
-        this.createdTime = new Date();
-        this.updatedTime = new Date();
+        this.createdTime = LocalDateTime.now();
+        this.updatedTime = LocalDateTime.now();
     }
 
-    /**
-     * 获取用户ID。
-     *
-     * @return 用户ID
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * 设置用户ID。
-     *
-     * @param id 用户ID
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
+    // Getters and Setters
 
     /**
      * 获取用户名。
      *
      * @return 用户名
      */
-    public String getUsername() {
-        return username;
+    public String getAccount() {
+        return account;
     }
 
     /**
      * 设置用户名。
      *
-     * @param username 用户名
+     * @param account 用户名
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     /**
@@ -126,18 +99,18 @@ public class User {
     }
 
     /**
-     * 获取用户全名。
+     * 获取用户的真实姓名。
      *
-     * @return 用户全名
+     * @return 用户的真实姓名
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 设置用户全名。
+     * 设置用户的真实姓名。
      *
-     * @param name 用户全名
+     * @param name 用户的真实姓名
      */
     public void setName(String name) {
         this.name = name;
@@ -166,7 +139,7 @@ public class User {
      *
      * @return 用户创建时间
      */
-    public Date getCreatedTime() {
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
@@ -175,48 +148,48 @@ public class User {
      *
      * @param createdTime 用户创建时间
      */
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 
     /**
-     * 获取用户更新时间。
+     * 获取用户信息最后更新时间。
      *
-     * @return 用户更新时间
+     * @return 用户信息最后更新时间
      */
-    public Date getUpdatedTime() {
+    public LocalDateTime getUpdatedTime() {
         return updatedTime;
     }
 
     /**
-     * 设置用户更新时间。
+     * 私有方法，用于设置用户信息最后更新时间。
      *
-     * @param updatedTime 用户更新时间
+     * @param updatedTime 用户信息最后更新时间
      */
-    public void setUpdatedTime(Date updatedTime) {
+    public void setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
     }
 
     /**
-     * 重写equals方法，用于比较两个User对象是否相等。
+     * 重写 equals 方法，用于比较两个用户对象是否相等。
      *
      * @param o 要比较的对象
-     * @return 如果相等返回true，否则返回false
+     * @return 如果对象相等返回 true，否则返回 false
      */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(name, user.name) && Objects.equals(role, user.role) && Objects.equals(createdTime, user.createdTime) && Objects.equals(updatedTime, user.updatedTime);
+        return Objects.equals(account, user.account) && Objects.equals(password, user.password) && Objects.equals(name, user.name) && Objects.equals(role, user.role) && Objects.equals(createdTime, user.createdTime) && Objects.equals(updatedTime, user.updatedTime);
     }
 
     /**
-     * 重写hashCode方法，用于计算User对象的哈希值。
+     * 重写 hashCode 方法，用于计算用户对象的哈希码。
      *
-     * @return User对象的哈希值
+     * @return 用户对象的哈希码
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, name, role, createdTime, updatedTime);
+        return Objects.hash(account, password, name, role, createdTime, updatedTime);
     }
 }
