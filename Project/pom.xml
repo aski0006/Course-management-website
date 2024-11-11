@@ -10,13 +10,21 @@
     <name>project</name>
     <packaging>war</packaging>
 
+    <!-- JDK 17 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>22</maven.compiler.target>
-        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
         <junit.version>5.11.0-M2</junit.version>
     </properties>
 
+<!-- JDK 20 -->
+<!--    <properties>-->
+<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+<!--        <maven.compiler.target>22</maven.compiler.target>-->
+<!--        <maven.compiler.source>22</maven.compiler.source>-->
+<!--        <junit.version>5.11.0-M2</junit.version>-->
+<!--    </properties>-->
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
@@ -29,9 +37,16 @@
 
 
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.3</version>
+            <scope>test</scope>
         </dependency>
         <!-- JAXB Runtime -->
         <dependency>
