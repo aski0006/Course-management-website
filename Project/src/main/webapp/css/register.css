@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F8FF;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-div {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.reg-content span {
+    color: #666666;
+}
+
+.reg-content a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto 20px;
+    text-align: left;
+}
+
+td {
+    padding: 10px 0;
+}
+
+.inputs input[type="text"],
+.inputs input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.inputs .err_msg {
+    color: #ff0000;
+    font-size: 12px;
+    display: none;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.buttons input[type="submit"] {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.clear {
+    clear: both;
+}
+
+.captcha {
+    display: flex;
+    align-items: center;
+}
+
+#captchaImage {
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message {
+    margin-top: 15px;
+    color: #d9534f;
+}
