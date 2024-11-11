@@ -1,10 +1,10 @@
-package com.asaki0019.project;
+package com.asaki0019.project.api;
 
 import java.io.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
+@WebServlet("/api/hello-servlet")
 public class HelloServlet extends HttpServlet {
     private String message;
 
