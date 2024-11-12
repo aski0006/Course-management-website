@@ -25,12 +25,21 @@
         </td>
       </tr>
       <tr>
-        <td>用户名</td>
+        <td>账号</td>
         <td class="inputs">
           <label for="username"></label>
           <input name="username" type="text" id="username" required>
           <br>
-          <span id="username_err" class="err_msg" style="display: none">用户名不太受欢迎</span>
+          <span id="username_err" class="err_msg" style="display: none">用户名出错啦</span>
+        </td>
+      </tr>
+      <tr>
+        <td>昵称</td>
+        <td class="inputs">
+          <label for="name"></label>
+          <input name="name" type="text" id="name" required>
+          <br>
+          <span id="name_err" class="err_msg" style="display: none">昵称不太受欢迎</span>
         </td>
       </tr>
       <tr>
@@ -65,6 +74,7 @@
   </form>
   <p id="message" class="message"></p>
 </div>
+
 <script src="javascript/register.js"></script>
 </body>
 </html>

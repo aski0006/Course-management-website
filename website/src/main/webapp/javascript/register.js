@@ -10,18 +10,23 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         const username = document.getElementById('username').value;
+        const name = document.getElementById('name').value;
         const password = document.getElementById('password').value;
         const verifiedCode = document.getElementById('verifiedCode').value;
         const role = document.querySelector('input[name="user_type"]:checked').value;
 
         const requestData = {
             username: username,
+            name: name,
             password: password,
             verifiedCode: verifiedCode,
             role: role
         };
 
-        fetch('https://9f966u1393.goho.co/api/user/register', {
+
+        // fetch('https://9f966u1393.goho.co/api/user/register', {
+        //本地测试用
+        fetch('api/user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
