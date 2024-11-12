@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 import java.io.*;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 用户登录API Servlet类
@@ -34,6 +36,8 @@ public class Login extends HttpServlet {
      */
     private final UserRepository userRepository = new UserRepository();
 
+    // 日志记录器
+    private static final Logger logger = Logger.getLogger(UserRepository.class.getName());
     // 错误码和消息常量
     private static final String ERROR_CODE_1 = "1";
     private static final String ERROR_CODE_2 = "2";
@@ -53,9 +57,8 @@ public class Login extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
-        try (PrintWriter out = response.getWriter();
-             Reader reader = new InputStreamReader(request.getInputStream())) {
+        PrintWriter out = response.getWriter();
+        try (Reader reader = new InputStreamReader(request.getInputStream())) {
 
             // 从请求中读取JSON数据
             JSONObject requestBody = new JSONObject(reader);
@@ -89,6 +92,9 @@ public class Login extends HttpServlet {
                             .put("role", user.getRole()));
 
             writeResponse(out, HttpServletResponse.SC_OK, successResponse, response);
+        }  catch (Exception e){
+            logger.log(Level.SEVERE, "Error : " , e);
+            writeErrorResponse(out, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "3", "An error occurred while processing the request.", response);
         }
     }
 

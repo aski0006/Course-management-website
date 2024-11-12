@@ -11,7 +11,7 @@
 <div class="form-div">
   <div class="reg-content">
     <h1>欢迎注册</h1>
-    <span>已有账号？</span> <a href="#">登录</a>
+    <span>已有账号？</span> <a href="login.jsp">登录</a>
   </div>
   <form id="registerForm" action="api/user/register" method="post">
     <table>
