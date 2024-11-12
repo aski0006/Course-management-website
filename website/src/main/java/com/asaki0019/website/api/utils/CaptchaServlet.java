@@ -1,4 +1,4 @@
-package com.asaki0019.website.api.tools;
+package com.asaki0019.website.api.utils;
 
 import com.asaki0019.website.tools.HutoolCaptcha;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/api/tools/captcha")
+@WebServlet("/api/utils/captcha")
 public class CaptchaServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(CaptchaServlet.class.getName());
     private HutoolCaptcha captchaGenerator;

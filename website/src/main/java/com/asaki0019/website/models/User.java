@@ -1,4 +1,4 @@
-package com.asaki0019.website.model;
+package com.asaki0019.website.models;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

@@ -34,10 +34,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('message').textContent = '登录成功';
                     document.getElementById('message').style.color = '#5cb85c';
                     // 可以在这里处理登录成功后的跳转逻辑
-
                 } else {
-                    document.getElementById('message').textContent = '登录失败';
-                    document.getElementById('message').style.color = '#d9534f';
+                    if (data.message && typeof data.message === 'string') {
+                        alert(data.message);
+                        document.getElementById('message').textContent = data.message;
+                        document.getElementById('message').style.color = '#d9534f';
+                    } else {
+                        alert('登录失败，请重试。');
+                        document.getElementById('message').textContent = '登录失败，请重试。';
+                        document.getElementById('message').style.color = '#d9534f';
+                    }
                 }
             })
             .catch(error => {
@@ -50,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function refreshCaptcha() {
     const captchaImage = document.getElementById('captchaImage');
-    // captchaImage.src = 'https://9f966u1193.goho.co/api/tools/captcha?t=' + new Date().getTime();
+    // captchaImage.src = 'https://9f966u1193.goho.co/api/utils/captcha?t=' + new Date().getTime();
     // 本地测试用
-    captchaImage.src = 'api/tools/captcha?t=' + new Date().getTime();
+    captchaImage.src = 'api/utils/captcha?t=' + new Date().getTime();
 }
