@@ -48,5 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function refreshCaptcha() {
     const captchaImage = document.getElementById('captchaImage');
-    captchaImage.src = 'https://9f966u1393.goho.co/api/captcha?t=' + new Date().getTime();
+    captchaImage.src = 'https://9f966u1393.goho.co/api/tools/captcha?t=' + new Date().getTime();
+    //在本地进行测试
+    // captchaImage.src = 'http://localhost:8080/project_war_exploded/api/tools/captcha?t=' + new Date().getTime();
 }
