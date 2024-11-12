@@ -35,12 +35,21 @@ document.addEventListener('DOMContentLoaded', function() {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
+                if (data.error_code === 0) {
                     document.getElementById('message').textContent = '注册成功';
                     document.getElementById('message').style.color = '#5cb85c';
+                    // 可以在这里处理注册成功后的跳转逻辑
+
                 } else {
-                    document.getElementById('message').textContent = '注册失败';
-                    document.getElementById('message').style.color = '#d9534f';
+                    if (data.message && typeof data.message === 'string') {
+                        alert(data.message);
+                        document.getElementById('message').textContent = data.message;
+                        document.getElementById('message').style.color = '#d9534f';
+                    } else {
+                        alert('注册失败，请重试。');
+                        document.getElementById('message').textContent = '注册失败，请重试。';
+                        document.getElementById('message').style.color = '#d9534f';
+                    }
                 }
             })
             .catch(error => {

@@ -45,7 +45,7 @@
             <tr>
                 <td></td>
                 <td class="inputs captcha">
-                    <img id="captchaImage" alt="验证码" style="cursor: pointer" src="api/tools/captcha">
+                    <img id="captchaImage" alt="验证码" style="cursor: pointer" src="api/utils/captcha">
                 </td>
             </tr>
         </table>
