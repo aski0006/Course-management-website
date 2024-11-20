@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('message').textContent = '注册成功';
                     document.getElementById('message').style.color = '#5cb85c';
                     // 可以在这里处理注册成功后的跳转逻辑
-
+                    window.location.href = "login.jsp"
                 } else {
                     if (data.message && typeof data.message === 'string') {
                         alert(data.message);

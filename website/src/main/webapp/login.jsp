@@ -13,7 +13,7 @@
         <h1>欢迎登录</h1>
         <span>没有账号？</span> <a href="register.jsp">注册</a>
     </div>
-    <form id="loginForm" action="api/user/login" method="post">
+    <form id="loginForm">
         <table>
             <tr>
                 <td>账号</td>

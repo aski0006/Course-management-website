@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('message').textContent = '登录成功';
                     document.getElementById('message').style.color = '#5cb85c';
                     // 可以在这里处理登录成功后的跳转逻辑
+                    localStorage.setItem("token",data.data.token)
+                    localStorage.setItem("name",data.data.name)
+                    window.location.href = "mainView.jsp"
                 } else {
                     if (data.message && typeof data.message === 'string') {
                         alert(data.message);
