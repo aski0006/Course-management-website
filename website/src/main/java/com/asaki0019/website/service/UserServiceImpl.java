@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 
-import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
                 return createErrorResponse("1", ERROR_MESSAGE_VERIFICATION_CODE);
             }
 
-            User user = userRepository.findByUsername(account);
+            User user = userRepository.findByAccount(account);
             if (user == null || !user.getPassword().equals(password)) {
                 return createErrorResponse("2", ERROR_MESSAGE_INVALID_CREDENTIALS);
             }
@@ -62,17 +61,18 @@ public class UserServiceImpl implements UserService {
             String verified = requestBody.getString("verifiedCode");
             String role = requestBody.getString("role");
 
+            if (("student").equals(role)) role = "学生";
+            else role = "教师";
+
             if (!verifyCaptchaCode(request, verified)) {
                 return createErrorResponse("1", ERROR_MESSAGE_VERIFICATION_CODE);
             }
 
-            if (userRepository.findByUsername(username) != null) {
+            if (userRepository.findByAccount(username) != null) {
                 return createErrorResponse("2", ERROR_MESSAGE_USER_EXISTS);
             }
 
             User newUser = new User(username, password, name, role);
-            newUser.setCreatedTime(LocalDateTime.now());
-            newUser.setUpdatedTime(LocalDateTime.now());
             userRepository.save(newUser);
             return new JSONObject()
                     .put("error_code", 0)
@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService {
             return createErrorResponse("3", "注册过程中发生错误");
         }
     }
+
 
     private boolean verifyCaptchaCode(HttpServletRequest request, String verified) {
         HttpSession session = request.getSession(false);
