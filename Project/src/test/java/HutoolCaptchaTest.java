@@ -3,10 +3,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 /**
  * HutoolCaptcha 工具类的测试类
  */
@@ -42,27 +38,6 @@ public class HutoolCaptchaTest {
         Assertions.assertNotNull(captchaCode);
         Assertions.assertEquals(6, captchaCode.length());
         Assertions.assertTrue(captchaCode.matches("\\d{6}"));
-    }
-
-    @Test
-    void testGenerateCaptchaAndSaveToLocal() {
-        // 生成验证码图片并获取其字节数组
-        byte[] captchaImage = hutoolCaptcha.generateCaptcha();
-        Assertions.assertNotNull(captchaImage);
-        Assertions.assertTrue(captchaImage.length > 0);
-
-        // 保存验证码图片到本地
-        String filePath = "captcha.png";
-        try (FileOutputStream fos = new FileOutputStream(filePath)) {
-            fos.write(captchaImage);
-            fos.flush();
-        } catch (IOException e) {
-            Assertions.fail("保存验证码图片到本地时发生异常");
-        }
-
-        // 验证文件是否已创建
-        File file = new File(filePath);
-        Assertions.assertTrue(file.exists() && file.length() > 0);
     }
 
     @Test

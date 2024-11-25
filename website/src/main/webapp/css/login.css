@@ -1,0 +1,134 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f8ff, #e0f7fa);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+.form-div {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.form-div:hover {
+    transform: translateY(-5px);
+}
+
+h1 {
+    color: #333333;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+.login-content span {
+    color: #666666;
+    font-size: 14px;
+}
+
+.login-content a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.login-content a:hover {
+    color: #0056b3;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto 20px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 15px 0;
+}
+
+.inputs input[type="text"],
+.inputs input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.inputs input[type="text"]:focus,
+.inputs input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.inputs .err_msg {
+    color: #ff0000;
+    font-size: 12px;
+    display: none;
+}
+
+.buttons {
+    margin-top: 25px;
+}
+
+.buttons input[type="submit"] {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+}
+
+.buttons input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.clear {
+    clear: both;
+}
+
+.captcha {
+    display: flex;
+    align-items: center;
+}
+
+#captchaImage {
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+#captchaImage:hover {
+    border-color: #007bff;
+}
+
+.message {
+    margin-top: 15px;
+    color: #d9534f;
+    font-size: 14px;
+}
+
+.message.success {
+    color: #5cb85c;
+}
