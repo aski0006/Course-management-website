@@ -4,7 +4,10 @@ import com.asaki0019.website.models.User;
 import com.asaki0019.website.tools.DatabaseUtils;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,7 +15,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     private static final Logger logger = Logger.getLogger(UserRepositoryImpl.class.getName());
 
-    private static final BasicDataSource dataSource = DatabaseUtils.getDataSource();
+    private static BasicDataSource dataSource;
+
+    public UserRepositoryImpl() {
+        dataSource = new DatabaseUtils().getDataSource();
+    }
 
     @Override
     public User findByAccount(String account) {

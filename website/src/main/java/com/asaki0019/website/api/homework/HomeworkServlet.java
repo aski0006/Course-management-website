@@ -27,7 +27,7 @@ public class HomeworkServlet extends HttpServlet {
         homeworkService = new HomeworkServiceImpl(new HomeworkRepositoryImpl());
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
@@ -35,7 +35,6 @@ public class HomeworkServlet extends HttpServlet {
              BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(request.getInputStream()))) {
             JSONObject requestBody = new JSONObject(readJsonBody(reader));
             JSONObject result = homeworkService.display(request, requestBody);
-            ;
             response.setStatus(HttpServletResponse.SC_OK);
             writeResponse(result, out);
         } catch (Exception e) {

@@ -8,9 +8,12 @@ import java.util.logging.Logger;
 public class DatabaseUtils {
     private static final Logger logger = Logger.getLogger(DatabaseUtils.class.getName());
 
-    private static final BasicDataSource dataSource;
+    private static BasicDataSource dataSource;
 
-    static {
+    public DatabaseUtils() {
+        if (dataSource != null) {
+            return;
+        }
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -18,15 +21,19 @@ public class DatabaseUtils {
         }
         dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/your_database");
-        dataSource.setUsername("your_username");
-        dataSource.setPassword("your_password");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/coursewebsitedatabase");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
         dataSource.setInitialSize(10);
         dataSource.setMaxTotal(50);
+
+        logger.info("Database connection pool initialized.");
     }
 
-    // 获取数据源
-    public static BasicDataSource getDataSource() {
+    public BasicDataSource getDataSource() {
+        if (dataSource == null) {
+            throw new IllegalStateException("DataSource has not been initialized.");
+        }
         return dataSource;
     }
 }

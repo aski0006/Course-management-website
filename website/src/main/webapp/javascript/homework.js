@@ -1,51 +1,63 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetchHomeworkData();
-
-    function fetchHomeworkData() {
-        // 假设你有一个API可以获取作业数据
-        // 这里使用静态数据作为示例
-        const currentHomework = [
-            { id: 1, name: '数学作业', dueDate: '2024-12-01', status: 'current' },
-            { id: 2, name: '物理作业', dueDate: '2024-11-05', status: 'current' }
-        ];
-        const completedHomework = [
-            { id: 3, name: '化学作业', dueDate: '2024-11-20', status: 'completed' }
-        ];
-        const unpublishedHomework = [
-            { id: 4, name: '生物作业', dueDate: '2024-12-10', status: 'unpublished' }
-        ];
-
-        updateHomeworkList(currentHomework, 'currentHomework');
-        updateHomeworkList(completedHomework, 'completedHomework');
-        updateHomeworkList(unpublishedHomework, 'unpublishedHomework');
+    let token = localStorage.getItem("token");
+    let name = localStorage.getItem("name");
+    if (name === null || token === null) {
+        window.location.href = "login.jsp";
+    } else {
+        document.getElementById("avatar-name").textContent = name
     }
-
-    function updateHomeworkList(homeworkList, listId) {
-        const listElement = document.getElementById(listId);
-        listElement.innerHTML = ''; // 清空列表
-        homeworkList.forEach(homework => {
-            const li = document.createElement('li');
-            li.textContent = `${homework.name} - 截止日期: ${homework.dueDate}`;
-
-            // 根据作业状态添加不同的类
-            switch (homework.status) {
-                case 'completed':
-                    li.classList.add('completedHomework');
-                    break;
-                case 'unpublished':
-                    li.classList.add('unpublishedHomework');
-                    break;
-                case 'current':
-                    // 检查截止日期是否已过，如果是，则添加 overdueHomework 类
-                    if (new Date(homework.dueDate) < new Date()) {
-                        li.classList.add('overdueHomework');
-                    } else {
-                        li.classList.add('currentHomework');
-                    }
-                    break;
+    fetch('api/homework/display', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({token})
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error_code === 0) {
+                console.log("ok");
+                updateHomeworkLists(data);
+            } else {
+                console.log("failure");
             }
-
-            listElement.appendChild(li);
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
-    }
 });
+
+function updateHomeworkLists(data) {
+    // 更新超时作业列表
+    updateList('overdueHomework', data.overdueHomework);
+    // 更新未发布作业列表
+    updateList('unpublishedHomework', data.unpublishedHomework);
+    // 更新已完成作业列表
+    updateList('completedHomework', data.completedHomework);
+    // 更新当前作业列表
+    updateList('currentHomework', data.currentHomework);
+}
+
+function updateList(listId, homeworkItems) {
+    console.log("now updating list" + listId)
+    const listElement = document.getElementById(listId);
+    listElement.innerHTML = ''; // 清空现有列表
+    homeworkItems.forEach(item => {
+        console.log("now updating list" + listId + item.content)
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <div class="homework-item">
+                <h3>${item.content}</h3>
+                <p>截止时间: ${formatDate(item.endTime)}</p>
+                <p>分数: ${item.score}</p>
+                <p>${item.completed ? '已完成' : '未完成'}</p>
+            </div>
+        `;
+        listElement.appendChild(listItem);
+    });
+}
+
+function formatDate(dateStr) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    return new Date(dateStr).toLocaleDateString('zh-CN', options);
+}

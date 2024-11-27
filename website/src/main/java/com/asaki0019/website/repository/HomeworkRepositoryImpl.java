@@ -13,8 +13,11 @@ import java.util.logging.Logger;
 public class HomeworkRepositoryImpl implements HomeworkRepository {
     private static final Logger logger = Logger.getLogger(HomeworkRepositoryImpl.class.getName());
 
-    private static final BasicDataSource dataSource = DatabaseUtils.getDataSource();
+    private static  BasicDataSource dataSource;
 
+    public HomeworkRepositoryImpl(){
+        dataSource = new DatabaseUtils().getDataSource();
+    }
     @Override
     public Homework findById(int id) {
         String query = "SELECT * FROM 作业 WHERE 作业id = ?";
@@ -98,13 +101,7 @@ public class HomeworkRepositoryImpl implements HomeworkRepository {
             preparedStatement.setString(1, studentId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Homework homework = new Homework(
-                        resultSet.getString("作业内容"),
-                        resultSet.getDouble("分数"),
-                        resultSet.getTimestamp("创建时间").toLocalDateTime(),
-                        resultSet.getTimestamp("截止时间").toLocalDateTime()
-                );
-                homeworks.add(homework);
+                homeworks.add(findById(resultSet.getInt("作业id")));
             }
             return homeworks;
         } catch (SQLException e) {
