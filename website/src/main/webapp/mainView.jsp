@@ -35,8 +35,7 @@
                 <img src="static/default.jpg" alt="avatar" id="userAvatar">
             </div>
         </li>
-        <li><a href="#" target="_blank">用户</a></li>
-        <li><a href="#" target="_blank">作业</a></li>
+        <li><a href="homework.jsp" target="_self">作业</a></li>
         <li><a href="#" target="_blank">测试</a></li>
         <li><a href="#" target="_blank">消息</a></li>
         <li><a href="#" target="_blank">设置</a></li>

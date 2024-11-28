@@ -1,8 +1,9 @@
-package com.asaki0019.website.api.user;
+package com.asaki0019.website.api.homework;
 
-import com.asaki0019.website.repository.UserRepository;
-import com.asaki0019.website.repository.UserRepositoryImpl;
-import com.asaki0019.website.service.UserServiceImpl;
+import com.asaki0019.website.repository.HomeworkRepository;
+import com.asaki0019.website.repository.HomeworkRepositoryImpl;
+import com.asaki0019.website.service.HomeworkService;
+import com.asaki0019.website.service.HomeworkServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,29 +17,29 @@ import java.io.PrintWriter;
 
 import static com.asaki0019.website.tools.JsonUtils.*;
 
-@WebServlet(name="login", value = "/api/user/login")
-public class LoginServlet extends HttpServlet {
-    // 使用依赖注入
-    private UserServiceImpl userServiceImpl;
+@WebServlet("/api/homework/display")
+public class HomeworkServlet extends HttpServlet {
 
+    private HomeworkService homeworkService;
 
     public void init() throws ServletException {
         super.init();
-        userServiceImpl = new UserServiceImpl( new UserRepositoryImpl());
+        homeworkService = new HomeworkServiceImpl(new HomeworkRepositoryImpl());
     }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         try (PrintWriter out = response.getWriter();
              BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(request.getInputStream()))) {
             JSONObject requestBody = new JSONObject(readJsonBody(reader));
-            JSONObject result = userServiceImpl.login(request, requestBody);
+            JSONObject result = homeworkService.display(request, requestBody);
             response.setStatus(HttpServletResponse.SC_OK);
             writeResponse(result, out);
         } catch (Exception e) {
             writeErrorResponse(response);
         }
     }
+
 }

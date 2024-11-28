@@ -1,0 +1,108 @@
+/* 通用样式 */
+body {
+    font-family: 'Varela Round', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #333;
+}
+
+.homework-container {
+    display: flex;
+
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* 导航栏样式 */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #007BFF;
+    color: #fff;
+}
+
+/* 头像和用户名容器样式 */
+.avatar-container {
+    display: flex;
+    align-items: center;
+}
+
+/* 用户名样式 */
+#avatar-name {
+    margin-right: 15px;
+    font-size: 16px;
+    color: #fff; /* 使用户名颜色与导航栏背景形成对比 */
+    font-weight: bold;
+}
+
+/* 头像样式 */
+#avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border: 2px solid #fff; /* 给头像添加白色边框 */
+}
+
+/* 用户头像图片样式 */
+#userAvatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease; /* 添加鼠标悬停时的缩放效果 */
+}
+
+#userAvatar:hover {
+    transform: scale(1.1); /* 鼠标悬停时头像放大 */
+}
+
+/* 作业列表样式 */
+.homework-list {
+    flex: 1;
+    margin-bottom: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 20px; /* 保持列表之间的间距 */
+}
+
+.homework-list h2 {
+    color: #333;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.homework-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.homework-list li {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+/* 作业状态样式 */
+.currentHomework {
+    background-color: #b9e1ed; /* 当前作业默认背景 */
+}
+
+.completedHomework {
+    background-color: greenyellow; /* 已完成作业背景 */
+}
+
+.overdueHomework {
+    background-color: #FFC0CB; /* 超过截止时间作业背景 */
+}
+
+.unpublishedHomework {
+    background-color: #d4d4d4; /* 未发布作业背景 */
+    opacity: 0.6; /* 未发布作业半透明表示锁定 */
+}

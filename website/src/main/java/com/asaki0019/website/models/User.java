@@ -60,6 +60,16 @@ public class User {
         this.updatedTime = LocalDateTime.now();
     }
 
+    public User(String account, String password, String name, String role,
+                LocalDateTime ct, LocalDateTime ut) {
+        this.account = account;
+        this.password = password;
+        this.name = name;
+        this.role = role;
+        this.createdTime = ct;
+        this.updatedTime = ut;
+    }
+
     // Getters and Setters
 
     /**

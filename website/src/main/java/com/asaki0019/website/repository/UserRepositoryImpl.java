@@ -1,109 +1,95 @@
 package com.asaki0019.website.repository;
 
 import com.asaki0019.website.models.User;
+import com.asaki0019.website.tools.DatabaseUtils;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserRepositoryImpl implements UserRepository {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/coursewebsitedatabase";
-    private static final String USER = "root";
-    private static final String PASSWORD = "root";
-
     private static final Logger logger = Logger.getLogger(UserRepositoryImpl.class.getName());
 
-    private static final BasicDataSource dataSource;
+    private static BasicDataSource dataSource;
 
-    static {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            logger.log(Level.SEVERE, "MySQL JDBC driver not found", e);
-        }
-        dataSource = new BasicDataSource();
-        dataSource.setUrl(URL);
-        dataSource.setUsername(USER);
-        dataSource.setPassword(PASSWORD);
-        dataSource.setInitialSize(5);
-        dataSource.setMaxTotal(10);
+    public UserRepositoryImpl() {
+        dataSource = new DatabaseUtils().getDataSource();
     }
 
     @Override
-    public User findByUsername(String account) {
-        String sql = "SELECT * FROM users WHERE account = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, account);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return mapRowToUser(rs);
-                }
+    public User findByAccount(String account) {
+        String query = "SELECT * FROM 用户 WHERE 账号 = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, account);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return new User(
+                        resultSet.getString("账号"),
+                        resultSet.getString("密码"),
+                        resultSet.getString("姓名"),
+                        resultSet.getString("角色"),
+                        resultSet.getTimestamp("创建时间").toLocalDateTime(),
+                        resultSet.getTimestamp("更新时间").toLocalDateTime()
+                );
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error occurred while finding user by account: " + account, e);
+            logger.log(Level.SEVERE, "Error while finding user by account", e);
         }
         return null;
     }
 
     @Override
     public void save(User user) {
-        String sql = "INSERT INTO users (account, password, name, role, created_time, updated_time) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, user.getAccount());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getName());
-            stmt.setString(4, user.getRole());
-            stmt.setTimestamp(5, Timestamp.valueOf(user.getCreatedTime()));
-            stmt.setTimestamp(6, Timestamp.valueOf(user.getUpdatedTime()));
-            stmt.executeUpdate();
-            logger.log(Level.INFO, "User saved successfully: " + user);
+        String query = "INSERT INTO 用户 (账号, 密码, 姓名, 角色) VALUES (?, ?, ?, ?)";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, user.getAccount());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getRole());
+
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error occurred while saving user: " + user, e);
+            logger.log(Level.SEVERE, "Error while saving user", e);
         }
     }
 
     @Override
     public void update(User user) {
-        String sql = "UPDATE users SET password = ?, name = ?, role = ?, updated_time = ? WHERE account = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, user.getPassword());
-            stmt.setString(2, user.getName());
-            stmt.setString(3, user.getRole());
-            stmt.setTimestamp(4, Timestamp.valueOf(user.getUpdatedTime()));
-            stmt.setString(5, user.getAccount());
-            stmt.executeUpdate();
-            logger.log(Level.INFO, "User updated successfully: " + user);
+        String query = "UPDATE 用户 SET 密码 = ?, 姓名 = ?, 角色 = ?, 更新时间 = CURRENT_TIMESTAMP WHERE 账号 = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getRole());
+            preparedStatement.setString(4, user.getAccount());
+
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error occurred while updating user: " + user, e);
+            logger.log(Level.SEVERE, "Error while updating user", e);
         }
     }
 
     @Override
     public void delete(String account) {
-        String sql = "DELETE FROM users WHERE account = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, account);
-            stmt.executeUpdate();
-            logger.log(Level.INFO, "User deleted successfully, account: " + account);
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error occurred while deleting user by account: " + account, e);
-        }
-    }
+        String query = "DELETE FROM 用户 WHERE 账号 = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-    private User mapRowToUser(ResultSet rs) throws SQLException {
-        User user = new User();
-        user.setAccount(rs.getString("account"));
-        user.setPassword(rs.getString("password"));
-        user.setName(rs.getString("name"));
-        user.setRole(rs.getString("role"));
-        user.setCreatedTime(rs.getTimestamp("created_time").toLocalDateTime());
-        user.setUpdatedTime(rs.getTimestamp("updated_time").toLocalDateTime());
-        return user;
+            preparedStatement.setString(1, account);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error while deleting user", e);
+        }
     }
 }
