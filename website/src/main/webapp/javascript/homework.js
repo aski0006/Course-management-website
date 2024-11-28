@@ -43,7 +43,7 @@ function updateList(listId, homeworkItems) {
     const listElement = document.getElementById(listId);
     listElement.innerHTML = ''; // 清空现有列表
     homeworkItems.forEach(item => {
-        console.log("now updating list" + listId + item.content)
+        console.log("now updating list " + listId +" "+ item.content)
         const listItem = document.createElement('li');
         listItem.innerHTML = `
             <div class="homework-item">
@@ -53,6 +53,18 @@ function updateList(listId, homeworkItems) {
                 <p>${item.completed ? '已完成' : '未完成'}</p>
             </div>
         `;
+        if(listId === 'currentHomework') {
+            const submitButton = document.createElement('button');
+            submitButton.textContent = '提交作业'
+            submitButton.addEventListener('click', function() {
+                window.location.href = '/homework/submit/' + item.id;
+            });
+            listItem.appendChild(submitButton);
+            console.log("创建按钮" + item.id)
+        }
+        else{
+            console.log(listId + '!= currentHomework')
+        }
         listElement.appendChild(listItem);
     });
 }
