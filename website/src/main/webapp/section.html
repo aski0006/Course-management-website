@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>课程章节</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --hover-color: #0056b3;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+
+        .back-button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .section-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .section-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section-item {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: bold;
+        }
+
+        .video-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .video-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .video-icon {
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+
+        .video-info {
+            flex-grow: 1;
+        }
+
+        .video-title {
+            margin: 0;
+            color: #333;
+        }
+
+        .progress-container {
+            width: 120px;
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            margin-left: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: #666;
+            margin-left: 10px;
+            min-width: 45px;
+        }
+    </style>
+</head>
+<body>
+<div class="section-container">
+    <a href="mainView.jsp" class="back-button">
+        <i class="fas fa-arrow-left"></i>返回
+    </a>
+    <h1 class="section-title">课程章节</h1>
+    <ul class="section-list">
+        <li class="section-item">
+            <div class="section-header">第一章：课程介绍</div>
+            <div class="video-item" onclick="playVideo(1)">
+                <div class="video-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">1.1 课程概述</h3>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-text">100%</span>
+            </div>
+            <div class="video-item" onclick="playVideo(2)">
+                <div class="video-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">1.2 学习方法介绍</h3>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 60%"></div>
+                </div>
+                <span class="progress-text">60%</span>
+            </div>
+        </li>
+        <li class="section-item">
+            <div class="section-header">第二章：基础知识</div>
+            <div class="video-item" onclick="playVideo(3)">
+                <div class="video-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">2.1 基本概念</h3>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 30%"></div>
+                </div>
+                <span class="progress-text">30%</span>
+            </div>
+            <div class="video-item" onclick="playVideo(4)">
+                <div class="video-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">2.2 核心原理</h3>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0%</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- 引入Font Awesome图标 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</body>
+</html>
